@@ -27,6 +27,7 @@ var Geohash = new function() {
   var pow = Math.pow;
   var log = Math.log;
   var table = '0123456789bcdefghjkmnpqrstuvwxyz';
+  var isGeohash = new RegExp('^[' + table + ']+$');
 
   // Private classes
   var Rect = function() {};
@@ -38,12 +39,25 @@ var Geohash = new function() {
 
   // Public methods
   this.encode = function(lat, lng) {
+    // Override 
+    if(lat instanceof Array && lng == null) {
+      lng = lat[1];
+      lat = lat[0];
+    }
+ 
+    // Type checker
+    lat *= 1;
+    lng *= 1;
+    if(lat !== lat) throw new Error('Geohash.encode: lat must be a Number');
+    if(lng !== lng) throw new Error('Geohash.encode: lng must be a Number');
+  
+    // Compute precision
     var lap = lat.toString().length - lat.toFixed().length - 2;
     var lop = lng.toString().length - lat.toFixed().length - 2;
     var prec = pow(10, -max(lap, lop, 0)) / 2;
      
+    // Initialize variables
     var rect = new Rect();
-
     var result = [];
     var edge = 180;
     var even = true;
@@ -52,6 +66,7 @@ var Geohash = new function() {
     var next;
     var last;
 
+    // Main loop
     while(edge >= prec) {
       if(even) {
         next = rect.halfLng();
@@ -86,11 +101,16 @@ var Geohash = new function() {
   };
 
   this.decode = function(hash) {
-    var rect = new Rect();
 
+    // Type Checker
+    if(!isGeohash.test(hash)) throw new Error('Geohash.decode: hash must be a geohash string');
+
+    // Initialize all veriables 
+    var rect = new Rect();
     var latE = 90;
     var lngE = 180;
 
+    // Abstract shink operation
     var shink = function(bit, value, even) {
       var bin = 1 << bit;
       if( !(bit & 1) ^ !(even & 1) ) {
@@ -108,6 +128,7 @@ var Geohash = new function() {
       }
     };
 
+    // Main loop
     for (var i = 0,c = hash.length; i < c; i++) {
       var value = table.indexOf(hash[i]);
       var even = i & 1;
@@ -120,6 +141,8 @@ var Geohash = new function() {
         lngE /= 8;
       }
     }
+
+    // Compute lat/lng and return a round data
     var pLat = pow(10, max(1, -round( log(latE) / log(10) )) - 1);
     var pLng = pow(10, max(1, -round( log(lngE) / log(10) )) - 1);
     return [
