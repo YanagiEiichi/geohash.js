@@ -1,0 +1,13 @@
+{
+  "name": "geohash.js",
+  "main": "geohash.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/YanagiEiichi/geohash.js",
+  "authors": [
+    "YanagiEiichi <admin@web-tinker.com>"
+  ],
+  "keywords": [
+    "geohash"
+  ],
+  "license": "MIT"
+}
