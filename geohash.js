@@ -152,3 +152,6 @@ var Geohash = new function() {
   };
 };
 
+
+// CMD support
+if(typeof module === 'object') module.exports = Geohash;
