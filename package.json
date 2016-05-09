@@ -1,0 +1,19 @@
+{
+  "name": "geohash.js",
+  "version": "1.0.0",
+  "description": "geohash => [lat,lng]",
+  "main": "geohash.js",
+  "scripts": {
+    "test": "echo OK"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YanagiEiichi/geohash.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YanagiEiichi/geohash.js/issues"
+  },
+  "homepage": "https://github.com/YanagiEiichi/geohash.js"
+}
