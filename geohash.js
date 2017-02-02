@@ -4,8 +4,8 @@
  * Coding by YanagiEiichi@web-tinker.com
  # LICENSE: MIT
  # LASTEDT: 2015-01-06
- # GIT: https://github.com/YanagiEiichi/geohash.js/blob/master/geohash.js 
- # BOWSER: 
+ # GIT: https://github.com/YanagiEiichi/geohash.js/blob/master/geohash.js
+ # BOWSER:
  # USAGE:
 
      var lat = 39.90882;
@@ -39,23 +39,23 @@ var Geohash = new function() {
 
   // Public methods
   this.encode = function(lat, lng) {
-    // Override 
+    // Override
     if(lat instanceof Array && lng == null) {
       lng = lat[1];
       lat = lat[0];
     }
- 
+
     // Type checker
     lat *= 1;
     lng *= 1;
     if(lat !== lat) throw new Error('Geohash.encode: lat must be a Number');
     if(lng !== lng) throw new Error('Geohash.encode: lng must be a Number');
-  
+
     // Compute precision
-    var lap = lat.toString().length - lat.toFixed().length - 2;
-    var lop = lng.toString().length - lat.toFixed().length - 2;
+    var lap = lat.toString().length - lat.toFixed().length - 1;
+    var lop = lng.toString().length - lng.toFixed().length - 1;
     var prec = pow(10, -max(lap, lop, 0)) / 2;
-     
+
     // Initialize variables
     var rect = new Rect();
     var result = [];
@@ -105,7 +105,7 @@ var Geohash = new function() {
     // Type Checker
     if(!isGeohash.test(hash)) throw new Error('Geohash.decode: hash must be a geohash string');
 
-    // Initialize all veriables 
+    // Initialize all veriables
     var rect = new Rect();
     var latE = 90;
     var lngE = 180;
@@ -114,7 +114,7 @@ var Geohash = new function() {
     var shink = function(bit, value, even) {
       var bin = 1 << bit;
       if( !(bit & 1) ^ !(even & 1) ) {
-        if(bin & value) { 
+        if(bin & value) {
           rect.minlat = rect.halfLat();
         } else {
           rect.maxlat = rect.halfLat();
