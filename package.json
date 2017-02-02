@@ -3,17 +3,28 @@
   "version": "1.0.0",
   "description": "geohash => [lat,lng]",
   "main": "geohash.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  },
   "scripts": {
-    "test": "echo OK"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/YanagiEiichi/geohash.js"
+    "url": "git+https://github.com/YanagiEiichi/geohash.js.git"
   },
+  "keywords": [
+    "geohash"
+  ],
   "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/YanagiEiichi/geohash.js/issues"
   },
-  "homepage": "https://github.com/YanagiEiichi/geohash.js"
+  "homepage": "https://github.com/YanagiEiichi/geohash.js#readme"
 }
