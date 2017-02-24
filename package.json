@@ -4,7 +4,7 @@
   "description": "geohash => [lat,lng]",
   "main": "geohash.js",
   "scripts": {
-    "test": "mocha"
+    "test": "eslint geohash.js --env node && eslint test --env mocha --env es6 && mocha"
   },
   "repository": {
     "type": "git",
