@@ -6,6 +6,7 @@ var Geohash = new function() {
   var max = Math.max;
   var pow = Math.pow;
   var log = Math.log;
+  var abs = Math.abs;
   var table = '0123456789bcdefghjkmnpqrstuvwxyz';
   var isGeohash = new RegExp('^[' + table + ']+$');
 
@@ -28,8 +29,10 @@ var Geohash = new function() {
     // Type checker
     lat *= 1;
     lng *= 1;
-    if(lat !== lat) throw new Error('Geohash.encode: lat must be a Number');
-    if(lng !== lng) throw new Error('Geohash.encode: lng must be a Number');
+    if(lat !== lat) throw new TypeError('lat must be a Number');
+    if(lng !== lng) throw new TypeError('lng must be a Number');
+    if(abs(lat) > 90) throw new RangeError('lat must in range [-90,90]');
+    if(abs(lng) > 180) throw new RangeError('lng must in range [-180,180]');
   
     // Compute precision
     var lap = lat.toPrecision(16).match(/\.(.*?)0*$/)[1].length;
@@ -83,7 +86,7 @@ var Geohash = new function() {
   this.decode = function(hash) {
 
     // Type Checker
-    if(!isGeohash.test(hash)) throw new Error('Geohash.decode: hash must be a geohash string');
+    if(!isGeohash.test(hash)) throw new Error('geohash malformed');
 
     // Initialize all veriables 
     var rect = new Rect();

@@ -33,10 +33,17 @@ describe('## encode', () => {
     assert.strictEqual(result, '0000');
   });
 
-  it('must thrown on error args', () => {
-    assert.throws(() => Geohash.encode(NaN, 1), Error);
-    assert.throws(() => Geohash.encode(1, NaN), Error);
-    assert.throws(() => Geohash.encode(), Error);
+  it('must thrown if error args provided', () => {
+    assert.throws(() => Geohash.encode(NaN, 1), TypeError);
+    assert.throws(() => Geohash.encode(1, NaN), TypeError);
+    assert.throws(() => Geohash.encode(), TypeError);
+  });
+
+  it('must be thrown if lat/lng overflow', () => {
+    assert.throws(() => Geohash.encode(90.1, 0), RangeError);
+    assert.throws(() => Geohash.encode(0, 180.1), RangeError);
+    assert.throws(() => Geohash.encode(0, -180.1), RangeError);
+    assert.throws(() => Geohash.encode(-90.1, 0), RangeError);
   });
 
 });
