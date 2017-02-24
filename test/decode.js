@@ -18,6 +18,21 @@ describe('## decode', () => {
     for (let i = 0; i < table.length; i++) assert.throws(() => Geohash.decode(table[i]));
   });
 
+  it('[.3,1] must be "s009w"', () => {
+    let result = Geohash.decode('s009w');
+    assert.deepEqual(result, [ .3, 1 ]);
+  });
+
+  it('integer must be support', () => {
+    let result = Geohash.decode('s065');
+    assert.deepEqual(result, [ 2, 3 ]);
+  });
+
+  it('[90,180] must be "zzzz"', () => {
+    let result = Geohash.decode('zzzz');
+    assert.deepEqual(result, [ 90, 180 ]);
+  });
+
   it('must thrown if error args provided', () => {
     assert.throws(() => Geohash.decode(''), Error);
     assert.throws(() => Geohash.decode('a'), Error);

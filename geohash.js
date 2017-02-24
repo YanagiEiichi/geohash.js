@@ -1,23 +1,3 @@
-/**
- # Geohash Module
- * Algorithm reference from http://eleme.io/geohash/
- * Coding by YanagiEiichi@web-tinker.com
- # LICENSE: MIT
- # LASTEDT: 2015-01-06
- # GIT: https://github.com/YanagiEiichi/geohash.js/blob/master/geohash.js 
- # BOWSER: 
- # USAGE:
-
-     var lat = 39.90882;
-     var lng = 116.39750;
-     var hash = Geohash.encode(lat, lng); // wx4g09njdr6
-     var result = Geohash.decode(hash);
-     result[0] === lat; // true
-     result[1] === lng; // true
-
- *
-**/
-
 // Abstract class Geohash
 var Geohash = new function() {
 
@@ -52,8 +32,8 @@ var Geohash = new function() {
     if(lng !== lng) throw new Error('Geohash.encode: lng must be a Number');
   
     // Compute precision
-    var lap = lat.toString().length - lat.toFixed().length - 2;
-    var lop = lng.toString().length - lat.toFixed().length - 2;
+    var lap = lat.toPrecision(16).match(/\.(.*?)0*$/)[1].length;
+    var lop = lng.toPrecision(16).match(/\.(.*?)0*$/)[1].length;
     var prec = pow(10, -max(lap, lop, 0)) / 2;
      
     // Initialize variables
