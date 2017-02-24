@@ -4,16 +4,19 @@
   "description": "geohash => [lat,lng]",
   "main": "geohash.js",
   "scripts": {
-    "test": "echo OK"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/YanagiEiichi/geohash.js"
   },
-  "author": "",
+  "author": "YanagiEiichi",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/YanagiEiichi/geohash.js/issues"
   },
-  "homepage": "https://github.com/YanagiEiichi/geohash.js"
+  "homepage": "https://github.com/YanagiEiichi/geohash.js",
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
 }
