@@ -33,6 +33,13 @@ describe('## decode', () => {
     assert.deepEqual(result, [ 90, 180 ]);
   });
 
+  it('minus zero must be considered', () => {
+    assert.deepEqual(Geohash.decode('s000').map(value => Math.sign(1 / value)), [ 1, 1 ]);
+    assert.deepEqual(Geohash.decode('7zzz').map(value => Math.sign(1 / value)), [ -1, -1 ]);
+    assert.deepEqual(Geohash.decode('kpbp').map(value => Math.sign(1 / value)), [ -1, 1 ]);
+    assert.deepEqual(Geohash.decode('ebpb').map(value => Math.sign(1 / value)), [ 1, -1 ]);
+  });
+
   it('[-90,-180] must be "0000"', () => {
     let result = Geohash.decode('0000');
     assert.deepEqual(result, [ -90, -180 ]);

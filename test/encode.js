@@ -28,6 +28,13 @@ describe('## encode', () => {
     assert.strictEqual(result, 'zzzz');
   });
 
+  it('minus zero must be considered', () => {
+    assert.strictEqual(Geohash.encode(0, 0), 's000');
+    assert.strictEqual(Geohash.encode(-0, -0), '7zzz');
+    assert.strictEqual(Geohash.encode(-0, 0), 'kpbp');
+    assert.strictEqual(Geohash.encode(0, -0), 'ebpb');
+  });
+
   it('[-90,-180] must be "0000"', () => {
     let result = Geohash.encode(-90, -180);
     assert.strictEqual(result, '0000');

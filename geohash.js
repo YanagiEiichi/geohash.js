@@ -14,8 +14,8 @@ var Geohash = new function() {
   var Rect = function() {};
   Rect.prototype = {
     minlat: -90, maxlat: 90, minlng: -180, maxlng: 180,
-    halfLat: function(){ return (this.minlat + this.maxlat) / 2; },
-    halfLng: function(){ return (this.minlng + this.maxlng) / 2; }
+    halfLat: function(){ return (this.minlat + this.maxlat) / 2 || -0; },
+    halfLng: function(){ return (this.minlng + this.maxlng) / 2 || -0; }
   };
 
   // Public methods
@@ -53,7 +53,7 @@ var Geohash = new function() {
     while(edge >= prec) {
       if(even) {
         next = rect.halfLng();
-        if(lng > next) {
+        if(lng === next ? 1 / lng > 1 / next : lng > next) {
           chr |= 1 << bit;
           rect.minlng = next;
         } else {
@@ -61,7 +61,7 @@ var Geohash = new function() {
         }
       } else {
         next = rect.halfLat();
-        if(lat > next) {
+        if(lat === next ? 1 / lat > 1 / next : lat > next) {
           chr |= 1 << bit;
           rect.minlat = next;
         } else {
