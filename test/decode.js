@@ -33,6 +33,11 @@ describe('## decode', () => {
     assert.deepEqual(result, [ 90, 180 ]);
   });
 
+  it('[-90,-180] must be "0000"', () => {
+    let result = Geohash.decode('0000');
+    assert.deepEqual(result, [ -90, -180 ]);
+  });
+
   it('must thrown if error args provided', () => {
     assert.throws(() => Geohash.decode(''), Error);
     assert.throws(() => Geohash.decode('a'), Error);

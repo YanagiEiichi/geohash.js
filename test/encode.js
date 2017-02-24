@@ -28,6 +28,11 @@ describe('## encode', () => {
     assert.strictEqual(result, 'zzzz');
   });
 
+  it('[-90,-180] must be "0000"', () => {
+    let result = Geohash.encode(-90, -180);
+    assert.strictEqual(result, '0000');
+  });
+
   it('must thrown on error args', () => {
     assert.throws(() => Geohash.encode(NaN, 1), Error);
     assert.throws(() => Geohash.encode(1, NaN), Error);
